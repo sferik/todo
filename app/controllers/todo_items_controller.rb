@@ -9,7 +9,8 @@ class TodoItemsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @todo_items }
+      format.json { render json: @todo_items + @completed_items }
+      format.xml {render xml: @todo_items + @completed_items }
     end
   end
 
