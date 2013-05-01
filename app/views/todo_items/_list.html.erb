@@ -2,7 +2,7 @@
 <% list.each do |todo_item| %>
   <li>
     <span class="item_name"><%= todo_item.name %></span>
-    <span class="item_due_at"><%= todo_item.due_at.strftime("%A, %B %e, %Y") %></span>
+    <time datetime="<%= todo_item.due_at.iso8601 %>" class="item_due_at"><%= todo_item.due_at.strftime("%A, %B %e, %Y") %></time>
     <span class="item_delete"><%= link_to svg_object('trash'), todo_item, method: :delete, data: { confirm: 'Are you sure?' } %></span>
   </li>
 <% end %>
