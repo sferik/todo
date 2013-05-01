@@ -3,8 +3,8 @@ class CreateTodoItems < ActiveRecord::Migration
     create_table :todo_items do |t|
       t.string :name
       t.datetime :due_at
-      t.boolean :completed
-      t.boolean :deleted
+      t.boolean :completed, :default => false
+      t.boolean :deleted, :default => false
 
       t.timestamps
     end
