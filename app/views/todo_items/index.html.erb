@@ -1,5 +1,9 @@
 <h1>Create a new TODO</h1>
 
+<p class="error hidden">
+  Server is not working. Try again later.
+</p>
+
 <%= form_for(@todo_item) do |f| %>
   <% if @todo_item.errors.any? %>
     <div id="error_explanation">

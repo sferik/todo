@@ -25,6 +25,9 @@ $(document).ready(function(){
         entry.appendTo(list);
         input.val('');
         input.focus();
+      },
+      error: function(){
+        $('.error').removeClass('hidden');
       }
     });
   });
