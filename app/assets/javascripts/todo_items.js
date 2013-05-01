@@ -1,4 +1,21 @@
 $(document).ready(function(){
+  function completeItem(){
+    var todoLi = $(this).parents('li');
+    var idToComplete = todoLi.attr('data-id');
+    $.ajax({
+      url: '/todo_items/' + idToComplete,
+      method: 'put',
+      data: {todo_item: {completed: true}},
+      dataType: 'json',
+      success: function(){
+        var completedContainer = $('#completed');
+        completedContainer.append(todoLi);
+      }
+    });
+  }
+
+  $('#todo li input[type=checkbox]').on('click', completeItem);
+
   var allowSubmit = true;
   $('form').on('submit', function(event){
     event.preventDefault();
@@ -28,11 +45,12 @@ $(document).ready(function(){
       },
       success: function(todo){
         var list = $('#todo');
-        var entry = $('<li></li>');
+        var entry = $('<li data-id="' + todo.id + '"></li>');
         var checkbox = $('<span class="item_checkbox"><input type="checkbox"></span>');
         var name = $('<span class="item_name"> ' + todo.name + ' </span>');
         var time = $('<time datetime="' + todo.due_at + '" class="item_due_at"> ' + moment(todo.due_at).format('dddd, MMMM D, YYYY') + ' </time>');
         var deleteButton = $('<span class="item_delete"><a href="/todo_items/' + todo.id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><span><object data="/assets/trash.svg" type="image/svg+xml"><img alt="Trash" src="/assets/trash.png" /></object></span></a></span>');
+        checkbox.on('click', completeItem);
         entry.append(checkbox, name, time, deleteButton);
         entry.appendTo(list);
         input.val('');
@@ -44,4 +62,5 @@ $(document).ready(function(){
       }
     });
   });
+
 });

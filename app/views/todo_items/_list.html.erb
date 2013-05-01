@@ -1,6 +1,6 @@
 <ol id="<%= list_name %>">
 <% list.each do |todo_item| %>
-  <li>
+  <li data-id="<%= todo_item.id %>">
     <span class="item_checkbox">
       <%= check_box_tag(nil, nil, todo_item.completed) %>
     </span>
