@@ -2,7 +2,7 @@
 <% list.each do |todo_item| %>
   <li>
     <span class="item_checkbox">
-      <input type="checkbox"<%= todo_item.completed ? " checked=\"checked\"" : nil %>>
+      <%= check_box_tag(nil, nil, todo_item.completed) %>
     </span>
     <span class="item_name">
       <%= todo_item.name %>
