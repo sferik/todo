@@ -17,8 +17,12 @@ $(document).ready(function(){
       method: form.attr('method'),
       data: {todo_item: item},
       dataType: 'json',
+      beforeSend: function(){
+        $('.spinner').fadeIn();
+      },
       complete: function(){
         allowSubmit = true;
+        $('.spinner').fadeOut();
       },
       success: function(todo){
         var list = $('#todo');
