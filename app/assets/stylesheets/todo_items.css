@@ -2,6 +2,11 @@
   display: none;
 }
 
+#completed li {
+  text-decoration: line-through;
+  color: #c00;
+}
+
 label:after {
   content: ":";
 }
