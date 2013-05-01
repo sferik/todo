@@ -1,14 +1,14 @@
 class TodoItemsController < ApplicationController
 
-  # GET /todo_items/new
-  # GET /todo_items/new.json
-  def new
+  # GET /todo_items
+  # GET /todo_items.json
+  def index
     @todo_items = TodoItem.all
     @todo_item = TodoItem.new
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @todo_item }
+      format.html # index.html.erb
+      format.json { render json: @todo_items }
     end
   end
 
