@@ -1,6 +1,9 @@
 $(document).ready(function(){
+  var allowSubmit = true;
   $('form').on('submit', function(event){
     event.preventDefault();
+    if(!allowSubmit) { return false }
+    allowSubmit = false;
     var form = $(this);
     var input = $('#todo_item_name');
     var inputValue = input.val();
@@ -14,6 +17,9 @@ $(document).ready(function(){
       method: form.attr('method'),
       data: {todo_item: item},
       dataType: 'json',
+      complete: function(){
+        allowSubmit = true;
+      },
       success: function(todo){
         var list = $('#todo');
         var entry = $('<li></li>');
