@@ -16,6 +16,23 @@ $(document).ready(function(){
 
   $('#todo').on('click', 'li input[type=checkbox]', completeItem);
 
+  function uncompleteItem(){
+    var completedLi = $(this).parents('li');
+    var idToUncomplete = completedLi.attr('data-id');
+    $.ajax({
+      url: '/todo_items/' + idToUncomplete,
+      method: 'put',
+      data: {todo_item: {completed: false}},
+      dataType: 'json',
+      success: function(){
+        var uncompletedContainer = $('#todo');
+        uncompletedContainer.append(completedLi);
+      }
+    });
+  }
+
+  $('#completed').on('click', 'li input[type=checkbox]', uncompleteItem);
+
   var allowSubmit = true;
   $('form').on('submit', function(event){
     event.preventDefault();
