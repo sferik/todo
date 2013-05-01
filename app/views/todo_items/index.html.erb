@@ -28,24 +28,8 @@
 
 <h2>Listing TODOs</h2>
 
-<ol>
-<% @todo_items.each do |todo_item| %>
-  <li>
-    <span><%= todo_item.name %></span>
-    <span><%= todo_item.due_at.strftime("%A, %B %e, %Y") %></span>
-    <span><%= link_to 'Destroy', todo_item, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-  </li>
-<% end %>
-</ol>
+<%= render :partial => 'list', :locals => {:list => @todo_items, :list_name => 'todo'} %>
 
 <h2>Completed TODOs</h2>
 
-<ol>
-<% @completed_items.each do |todo_item| %>
-  <li>
-    <span><%= todo_item.name %></span>
-    <span><%= todo_item.due_at.strftime("%A, %B %e, %Y") %></span>
-    <span><%= link_to 'Destroy', todo_item, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-  </li>
-<% end %>
-</ol>
+<%= render :partial => 'list', :locals => {:list => @completed_items, :list_name => 'completed'} %>
