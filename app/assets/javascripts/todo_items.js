@@ -27,7 +27,8 @@ $(document).ready(function(){
         input.focus();
       },
       error: function(){
-        $('.error').removeClass('hidden');
+        $('.error').slideDown();
+        setTimeout(function(){$('.error').slideUp();}, 3000);
       }
     });
   });
