@@ -12,16 +12,18 @@ $(document).ready(function(){
     var day = $('#todo_item_due_at_3i').val();
     var date = new Date(year + '-' + month + '-' + day);
     var item = {name: inputValue, due_at: date};
+    var timer;
     $.ajax({
       url: form.attr('action'),
       method: form.attr('method'),
       data: {todo_item: item},
       dataType: 'json',
       beforeSend: function(){
-        $('.spinner').fadeIn();
+        timer = setTimeout(function(){$('.spinner').fadeIn();}, 1000);
       },
       complete: function(){
         allowSubmit = true;
+        clearTimeout(timer);
         $('.spinner').fadeOut();
       },
       success: function(todo){
