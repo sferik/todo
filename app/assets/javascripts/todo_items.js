@@ -1,37 +1,21 @@
 $(document).ready(function(){
-  function completeItem(){
-    var todoLi = $(this).parents('li');
-    var idToComplete = todoLi.attr('data-id');
+  function updateItem(container, complete, checkbox){
+    var li = $(checkbox).parents('li');
+    var id = li.attr('data-id');
     $.ajax({
-      url: '/todo_items/' + idToComplete,
+      url: '/todo_items/' + id,
       method: 'put',
-      data: {todo_item: {completed: true}},
+      data: {todo_item: {completed: complete}},
       dataType: 'json',
       success: function(){
-        var completedContainer = $('#completed');
-        completedContainer.append(todoLi);
+        var list = $(container);
+        list.append(li);
       }
     });
   }
 
-  $('#todo').on('click', 'li input[type=checkbox]', completeItem);
-
-  function uncompleteItem(){
-    var completedLi = $(this).parents('li');
-    var idToUncomplete = completedLi.attr('data-id');
-    $.ajax({
-      url: '/todo_items/' + idToUncomplete,
-      method: 'put',
-      data: {todo_item: {completed: false}},
-      dataType: 'json',
-      success: function(){
-        var uncompletedContainer = $('#todo');
-        uncompletedContainer.append(completedLi);
-      }
-    });
-  }
-
-  $('#completed').on('click', 'li input[type=checkbox]', uncompleteItem);
+  $('#todo').on('click', 'li input[type=checkbox]', function(){updateItem('#completed', true, this);});
+  $('#completed').on('click', 'li input[type=checkbox]', function(){updateItem('#todo', false, this);});
 
   var allowSubmit = true;
   $('form').on('submit', function(event){
