@@ -1,0 +1,11 @@
+%ol{:id => list_name}
+  - list.each do |todo_item|
+    %li{"data-id" => todo_item.id}
+      %span.item_checkbox
+        = check_box_tag(nil, nil, todo_item.completed)
+      %span.item_name
+        = todo_item.name
+      %time.item_due_at{:datetime => todo_item.due_at.iso8601}
+        = todo_item.due_at.strftime("%A, %B %e, %Y")
+      %span.item_delete
+        = link_to svg_object('trash'), todo_item, method: :delete, data: { confirm: 'Are you sure?' }

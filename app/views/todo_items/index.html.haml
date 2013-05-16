@@ -1,0 +1,26 @@
+%h1 Create a new TODO
+.spinner.hidden
+  = image_tag("big-roller.gif")
+%p.error.hidden
+  Server is not working. Try again later.
+= form_for(@todo_item) do |f|
+  - if @todo_item.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@todo_item.errors.count, "error")
+        prohibited this todo_item from being saved:
+      %ul
+        - @todo_item.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :due_at
+    = f.date_select :due_at
+  .actions
+    = f.submit "Add item"
+%h2 Listing TODOs
+= render :partial => 'list', :locals => {:list => @todo_items, :list_name => 'todo'}
+%h2 Completed TODOs
+= render :partial => 'list', :locals => {:list => @completed_items, :list_name => 'completed'}
